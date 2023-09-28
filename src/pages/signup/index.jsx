@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Signup.module.css";
 import Form from "@/components/UI/Form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signupThunk } from "@/store/signupSlice";
 import { useRouter } from "next/router";
 
@@ -10,6 +10,7 @@ const index = () => {
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const status = useSelector((state) => state.signupSlice.status);
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -21,7 +22,7 @@ const index = () => {
       case "Email":
         setEmail(value);
         return;
-      case "username":
+      case "Username":
         setUsername(value);
         return;
       case "Password":
@@ -34,14 +35,13 @@ const index = () => {
   const submitHandler = () => {
     const user = { fullname: fullName, username: username, email, password };
     dispatch(signupThunk(user));
-    router.push("/");
   };
 
   useEffect(() => {
     if (localStorage.getItem("isLoggedIn") === "true") {
       router.push("/dashboard");
     }
-  }, []);
+  }, [status]);
 
   return (
     <div className={styles.loginPageContainer}>
@@ -50,7 +50,7 @@ const index = () => {
         fields={{
           "Full name": "text",
           Email: "email",
-          username: "text",
+          Username: "text",
           Password: "password",
         }}
         button="signup"

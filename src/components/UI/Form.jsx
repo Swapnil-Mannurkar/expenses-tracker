@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./Form.module.css";
 import Input from "./Input";
 import DarkButton from "./DarkButton";
 import Link from "next/link";
+import { useSelector } from "react-redux";
 
 const Form = (props) => {
+  const signupStatus = useSelector((state) => state.signupSlice.status);
+  const loginStatus = useSelector((state) => state.loginSlice.status);
   const fields = Object.entries(props.fields);
+  const isLoading = signupStatus === "loading" || loginStatus === "loading";
 
   const changeHandler = (value, field) => {
     props.onChange(value, field);
@@ -34,7 +38,7 @@ const Form = (props) => {
           <Input for={item[0]} type={item[1]} onChange={changeHandler} />
         </div>
       ))}
-      <DarkButton title={props.button} />
+      <DarkButton title={isLoading ? "Loading...." : props.button} />
       <p className={styles.redirectMessage}>
         {props.button === "login" ? "Don't" : "Already"} have an account? {link}
       </p>
