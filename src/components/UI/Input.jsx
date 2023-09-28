@@ -2,7 +2,11 @@ import React from "react";
 import styles from "./Input.module.css";
 
 const Input = (props) => {
-  let isTrue = props.type === "password";
+  let isPassword = props.type === "password";
+
+  const changeHandler = (e) => {
+    props.onChange(e.target.value, props.for);
+  };
 
   return (
     <>
@@ -12,8 +16,9 @@ const Input = (props) => {
       <input
         type={props.type}
         className={styles.input}
-        minLength={isTrue ? 8 : ""}
+        minLength={isPassword ? 8 : ""}
         style={{ borderColor: "black" }}
+        onChange={changeHandler}
         required
       />
     </>

@@ -9,16 +9,18 @@ export const signupThunk = createAsyncThunk(
   "signupThunk",
   async (userDetails) => {
     const username = userDetails.username;
-    const { ...userData } = userDetails;
+    console.log(username);
+    const { ...userdata } = userDetails;
+    console.log(userdata);
 
     await fetch(
-      `https://expense-tracker-15049-default-rtdb.firebaseio.com/users/${username}`,
+      `https://expense-tracker-b7155-default-rtdb.firebaseio.com/users/${username}`,
       {
         method: "PUT",
         headers: {
           "content-type": "application/json",
         },
-        body: JSON.stringify(userData),
+        body: JSON.stringify(userdata),
       }
     );
   }
