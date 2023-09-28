@@ -8,7 +8,8 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    if (localStorage.getItem("isLoggedIn")) {
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    if (isLoggedIn === true) {
       router.push("/dashboard");
     }
   }, []);

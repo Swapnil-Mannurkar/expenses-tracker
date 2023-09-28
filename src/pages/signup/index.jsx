@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 
 const index = () => {
   const [fullName, setFullName] = useState();
-  const [userName, setUserName] = useState();
+  const [username, setUsername] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const dispatch = useDispatch();
@@ -21,8 +21,8 @@ const index = () => {
       case "Email":
         setEmail(value);
         return;
-      case "Username":
-        setUserName(value);
+      case "username":
+        setUsername(value);
         return;
       case "Password":
         setPassword(value);
@@ -32,13 +32,13 @@ const index = () => {
   };
 
   const submitHandler = () => {
-    const user = { fullname: fullName, username: userName, email, password };
+    const user = { fullname: fullName, username: username, email, password };
     dispatch(signupThunk(user));
     router.push("/");
   };
 
   useEffect(() => {
-    if (localStorage.getItem("isLoggedIn")) {
+    if (localStorage.getItem("isLoggedIn") === "true") {
       router.push("/dashboard");
     }
   }, []);
@@ -50,7 +50,7 @@ const index = () => {
         fields={{
           "Full name": "text",
           Email: "email",
-          Username: "text",
+          username: "text",
           Password: "password",
         }}
         button="signup"

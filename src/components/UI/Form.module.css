@@ -16,5 +16,23 @@
 }
 
 .redirectMessage {
-    text-align: center;
+  text-align: center;
+}
+
+@media screen and (max-width: 500px) {
+  .formContainer {
+    width: 80%;
+  }
+}
+
+@media screen and (min-width: 501px) and (max-width: 900px) {
+  .formContainer {
+    width: 50%;
+  }
+}
+
+@media screen and (min-width: 901px) and (max-width: 1200px) {
+  .formContainer {
+    width: 40%;
+  }
 }

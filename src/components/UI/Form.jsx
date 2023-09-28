@@ -16,17 +16,16 @@ const Form = (props) => {
     props.onSubmit();
   };
 
-  const signup = (
-    <Link href="/signup" style={{ color: "blue" }}>
-      Signup
-    </Link>
-  );
-
-  const login = (
-    <Link href="/" style={{ color: "blue" }}>
-      Login
-    </Link>
-  );
+  const link =
+    props.button === "login" ? (
+      <Link href="/signup" style={{ color: "blue" }}>
+        Signup
+      </Link>
+    ) : (
+      <Link href="/" style={{ color: "blue" }}>
+        Login
+      </Link>
+    );
 
   return (
     <form className={styles.formContainer} onSubmit={submitHandler}>
@@ -37,8 +36,7 @@ const Form = (props) => {
       ))}
       <DarkButton title={props.button} />
       <p className={styles.redirectMessage}>
-        {props.button === "login" ? "Don't" : "Already"} have an account?{" "}
-        {props.button === "login" ? signup : login}
+        {props.button === "login" ? "Don't" : "Already"} have an account? {link}
       </p>
     </form>
   );
