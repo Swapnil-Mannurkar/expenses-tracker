@@ -3,21 +3,37 @@ import styles from "./Input.module.css";
 import { useSelector } from "react-redux";
 
 const Input = (props) => {
-  const status = useSelector((state) => state.signupSlice.status);
-  const [displayError, setDisplayError] = useState(false);
+  const signupStatus = useSelector((state) => state.signupSlice.status);
+  const loginStatus = useSelector((state) => state.loginSlice.status);
+  const [displayUsernameError, setDisplayUsernameError] = useState(false);
+  const [usernameErrorMessage, setUsernameErrorMessage] = useState("");
+  const [displayPasswordError, setDisplayPasswordError] = useState(false);
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
   let isUsername = props.for === "Username";
-  let isPassword = props.type === "password";
+  let isPassword = props.for === "Password";
 
   const changeHandler = (e) => {
-    if (isUsername) setDisplayError(false);
+    if (isUsername) setDisplayUsernameError(false);
+    if (isPassword) setDisplayPasswordError(false);
     props.onChange(e.target.value, props.for);
   };
 
   useEffect(() => {
-    if (status === "User already exists!") {
-      setDisplayError(true);
+    if (signupStatus === "User already exists!") {
+      setDisplayUsernameError(true);
+      setUsernameErrorMessage(signupStatus);
     }
-  }, [status]);
+  }, [signupStatus]);
+
+  useEffect(() => {
+    if (loginStatus === "User not found!") {
+      setDisplayUsernameError(true);
+      setUsernameErrorMessage(loginStatus);
+    } else if (loginStatus === "Incorrect password!") {
+      setDisplayPasswordError(true);
+      setPasswordErrorMessage(loginStatus);
+    }
+  }, [loginStatus]);
 
   return (
     <>
@@ -30,10 +46,16 @@ const Input = (props) => {
         minLength={isPassword ? 8 : ""}
         style={{ borderColor: "black" }}
         onChange={changeHandler}
+        required
       />
-      {isUsername && displayError && (
+      {isUsername && displayUsernameError && (
         <p style={{ position: "absolute", marginTop: "56px", color: "red" }}>
-          {status}
+          {usernameErrorMessage}
+        </p>
+      )}
+      {isPassword && displayPasswordError && (
+        <p style={{ position: "absolute", marginTop: "56px", color: "red" }}>
+          {passwordErrorMessage}
         </p>
       )}
     </>

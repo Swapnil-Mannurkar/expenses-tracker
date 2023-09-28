@@ -2,11 +2,15 @@ import React, { useEffect, useState } from "react";
 import styles from "./Login.module.css";
 import Form from "../UI/Form";
 import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import { loginThunk } from "@/store/loginSlice";
 
 const Login = () => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const router = useRouter();
+  const dispatch = useDispatch();
+  const status = useSelector((state) => state.loginSlice.status);
 
   const changeHandler = (value, field) => {
     if (field === "Username") {
@@ -18,14 +22,16 @@ const Login = () => {
 
   const submitHandler = () => {
     const user = { username: username, password: password };
-    console.log("login submit handler");
+    dispatch(loginThunk(user));
   };
 
   useEffect(() => {
     if (localStorage.getItem("isLoggedIn") === "true") {
       router.push("/dashboard");
+    } else {
+      localStorage.setItem("isLoggedIn", false);
     }
-  }, []);
+  }, [status]);
 
   return (
     <div className={styles.loginPageContainer}>

@@ -10,6 +10,7 @@ export const loginThunk = createAsyncThunk(
   "loginThunk",
   async (userDetails) => {
     const username = userDetails.username;
+    const password = userDetails.password;
 
     const response = await fetch(
       `https://expense-tracker-b7155-default-rtdb.firebaseio.com/users.json`
@@ -17,6 +18,15 @@ export const loginThunk = createAsyncThunk(
     const users = await response.json();
 
     if (users[username]) {
+      const user = users[username];
+
+      if (user.password === password) {
+        localStorage.setItem("isLoggedIn", true);
+        localStorage.setItem("username", username);
+      } else {
+        return { message: "Incorrect password!" };
+      }
+      return { message: "success" };
     } else {
       return { message: "User not found!" };
     }
@@ -37,8 +47,10 @@ const loginSlice = createSlice({
       .addCase(loginThunk.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(loginThunk.fulfilled, (state) => {
-        state.status = "success";
+      .addCase(loginThunk.fulfilled, (state, action) => {
+        const message = action.payload.message;
+        if (message === "success") state.status = "success";
+        else state.status = message;
       })
       .addCase(loginThunk.rejected, (state, action) => {
         state.status = "failed";
