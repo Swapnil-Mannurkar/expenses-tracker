@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Signup.module.css";
 import Form from "@/components/UI/Form";
 import { useDispatch } from "react-redux";
 import { signupThunk } from "@/store/signupSlice";
+import { useRouter } from "next/router";
 
 const index = () => {
   const [fullName, setFullName] = useState();
@@ -10,6 +11,7 @@ const index = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const changeHandler = (value, field) => {
     switch (field) {
@@ -32,7 +34,14 @@ const index = () => {
   const submitHandler = () => {
     const user = { fullname: fullName, username: userName, email, password };
     dispatch(signupThunk(user));
+    router.push("/");
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("isLoggedIn")) {
+      router.push("/dashboard");
+    }
+  }, []);
 
   return (
     <div className={styles.loginPageContainer}>

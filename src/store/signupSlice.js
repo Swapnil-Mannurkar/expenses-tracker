@@ -9,12 +9,18 @@ export const signupThunk = createAsyncThunk(
   "signupThunk",
   async (userDetails) => {
     const username = userDetails.username;
-    console.log(username);
     const { ...userdata } = userDetails;
-    console.log(userdata);
+
+    const response = await fetch(
+      `https://expense-tracker-b7155-default-rtdb.firebaseio.com/users.json`
+    );
+    const users = await response.json();
+    if (users[username]) {
+      return { message: "User already exists!" };
+    }
 
     await fetch(
-      `https://expense-tracker-b7155-default-rtdb.firebaseio.com/users/${username}`,
+      `https://expense-tracker-b7155-default-rtdb.firebaseio.com/users/${username}.json`,
       {
         method: "PUT",
         headers: {
@@ -23,6 +29,9 @@ export const signupThunk = createAsyncThunk(
         body: JSON.stringify(userdata),
       }
     );
+    localStorage.setItem("username", username);
+    localStorage.setItem("isLoggedIn", true);
+    return { message: "success" };
   }
 );
 
@@ -35,8 +44,10 @@ const signupSlice = createSlice({
       .addCase(signupThunk.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(signupThunk.fulfilled, (state) => {
-        state.status = "success";
+      .addCase(signupThunk.fulfilled, (state, action) => {
+        const message = action.payload.message;
+        if (message === "success") state.status = "success";
+        else state.status = message;
       })
       .addCase(signupThunk.rejected, (state, action) => {
         state.status = "failed";

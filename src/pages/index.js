@@ -1,8 +1,18 @@
 import Head from "next/head";
 import styles from "@/pages/Home.module.css";
 import Login from "@/components/login/Login";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 export default function Home() {
+  const router = useRouter();
+
+  useEffect(() => {
+    if (localStorage.getItem("isLoggedIn")) {
+      router.push("/dashboard");
+    }
+  }, []);
+
   return (
     <>
       <Head>
