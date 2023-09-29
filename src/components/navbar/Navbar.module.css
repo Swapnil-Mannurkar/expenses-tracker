@@ -17,9 +17,6 @@
   text-transform: uppercase;
 }
 
-.navItemsContainer {
-}
-
 .navbarItems {
   display: flex;
   align-items: center;
@@ -29,5 +26,3 @@
   font-weight: bold;
 }
 
-.navbarItem {
-}
