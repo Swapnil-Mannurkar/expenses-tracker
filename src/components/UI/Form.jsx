@@ -35,7 +35,12 @@ const Form = (props) => {
     <form className={styles.formContainer} onSubmit={submitHandler}>
       {fields.map((item) => (
         <div key={item[0]} className={styles.inputContainer}>
-          <Input for={item[0]} type={item[1]} onChange={changeHandler} />
+          <Input
+            for={item[0]}
+            type={item[1]}
+            onChange={changeHandler}
+            formType={props.button}
+          />
         </div>
       ))}
       <DarkButton title={isLoading ? "Loading...." : props.button} />

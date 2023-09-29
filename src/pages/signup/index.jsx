@@ -33,7 +33,12 @@ const index = () => {
   };
 
   const submitHandler = () => {
-    const user = { fullname: fullName, username: username, email, password };
+    const user = {
+      fullname: fullName,
+      username,
+      email,
+      password,
+    };
     dispatch(signupThunk(user));
   };
 

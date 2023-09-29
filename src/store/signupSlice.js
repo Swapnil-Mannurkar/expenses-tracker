@@ -9,13 +9,20 @@ export const signupThunk = createAsyncThunk(
   "signupThunk",
   async (userDetails) => {
     const username = userDetails.username;
+    const email = userDetails.email;
     const { ...userdata } = userDetails;
 
     const response = await fetch(
       `https://expense-tracker-b7155-default-rtdb.firebaseio.com/users.json`
     );
-    const users = await response.json();
-    if (users[username]) {
+    let users = Object.values(await response.json());
+
+    const userExists = users.find((user) => user.username === username);
+    const emailExists = users.find((user) => user.email === email);
+
+    if (emailExists) {
+      return { message: "Email already exists!" };
+    } else if (userExists) {
       return { message: "User already exists!" };
     }
 
@@ -51,7 +58,7 @@ const signupSlice = createSlice({
       })
       .addCase(signupThunk.rejected, (state, action) => {
         state.status = "failed";
-        state.error = action.error.message;
+        state.error = action.payload.message;
       });
   },
 });
