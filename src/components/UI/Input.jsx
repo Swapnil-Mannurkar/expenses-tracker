@@ -71,6 +71,7 @@ const Input = (props) => {
             : isEmail && displayEmailError
             ? "red"
             : "black",
+          marginBottom: isPassword ? "5px" : "0",
         }}
         onChange={changeHandler}
         required

@@ -1,0 +1,33 @@
+.navbar {
+  background-color: var(--lightgray);
+  color: #000;
+}
+
+.navbarContainer {
+  width: 80%;
+  height: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 0px;
+}
+
+.title {
+  text-transform: uppercase;
+}
+
+.navItemsContainer {
+}
+
+.navbarItems {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 3rem;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.navbarItem {
+}
