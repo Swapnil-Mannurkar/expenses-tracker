@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./Signup.module.css";
 import Form from "@/components/UI/Form";
 import { useDispatch, useSelector } from "react-redux";
-import { signupThunk } from "@/store/signupSlice";
+import { signupActions, signupThunk } from "@/store/signupSlice";
 import { useRouter } from "next/router";
 
 const index = () => {
@@ -47,6 +47,10 @@ const index = () => {
       router.push("/dashboard");
     }
   }, [status]);
+
+  useEffect(() => {
+    dispatch(signupActions.resetStatus());
+  }, []);
 
   return (
     <div className={styles.loginPageContainer}>

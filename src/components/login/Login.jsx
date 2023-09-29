@@ -3,7 +3,7 @@ import styles from "./Login.module.css";
 import Form from "../UI/Form";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
-import { loginThunk } from "@/store/loginSlice";
+import { loginActions, loginThunk } from "@/store/loginSlice";
 
 const Login = () => {
   const [username, setUsername] = useState();
@@ -32,6 +32,10 @@ const Login = () => {
       localStorage.setItem("isLoggedIn", false);
     }
   }, [status]);
+
+  useEffect(() => {
+    dispatch(loginActions.resetStatus());
+  }, []);
 
   return (
     <div className={styles.loginPageContainer}>

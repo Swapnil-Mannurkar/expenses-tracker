@@ -26,7 +26,7 @@ export const loginThunk = createAsyncThunk(
       } else {
         return { message: "Incorrect password!" };
       }
-      return { message: "success" };
+      return { user, message: "success" };
     } else {
       return { message: "User not found!" };
     }
@@ -41,6 +41,9 @@ const loginSlice = createSlice({
       localStorage.setItem("isLoggedIn", false);
       localStorage.removeItem("username");
     },
+    resetStatus(state) {
+      state.status = "idle";
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -49,8 +52,11 @@ const loginSlice = createSlice({
       })
       .addCase(loginThunk.fulfilled, (state, action) => {
         const message = action.payload.message;
-        if (message === "success") state.status = "success";
-        else state.status = message;
+        const user = action.payload.user;
+        if (message === "success") {
+          state.status = "success";
+          state.user = user;
+        } else state.status = message;
       })
       .addCase(loginThunk.rejected, (state, action) => {
         state.status = "failed";
