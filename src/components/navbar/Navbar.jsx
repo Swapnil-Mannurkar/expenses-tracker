@@ -6,9 +6,11 @@ import { loginActions } from "@/store/loginSlice";
 import DarkButton from "../UI/DarkButton";
 import Link from "next/link";
 
-const Navbar = () => {
+const Navbar = (props) => {
   const router = useRouter();
   const dispatch = useDispatch();
+
+  const currentPage = router.pathname.slice(1);
 
   const logoutHandler = () => {
     dispatch(loginActions.logout());
@@ -25,10 +27,16 @@ const Navbar = () => {
         </div>
         <div className={styles.navItemsContainer}>
           <ul className={styles.navbarItems}>
-            <li className={styles.navbarItem}>
+            <li
+              className={styles.navbarItem}
+              style={currentPage === "dashboard" ? { color: "red" } : {}}
+            >
               <Link href="/">Home</Link>
             </li>
-            <li className={styles.navbarItem}>
+            <li
+              className={styles.navbarItem}
+              style={currentPage === "add-expense" ? { color: "red" } : {}}
+            >
               <Link href="/add-expense">add expense</Link>
             </li>
             <li className={styles.navbarItem}>
