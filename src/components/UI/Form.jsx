@@ -15,7 +15,8 @@ const Form = (props) => {
     props.onChange(value, field);
   };
 
-  const submitHandler = () => {
+  const submitHandler = (e) => {
+    e.preventDefault();
     props.onSubmit();
   };
 
@@ -42,10 +43,7 @@ const Form = (props) => {
           />
         </div>
       ))}
-      <DarkButton
-        title={isLoading ? "Loading...." : props.button}
-        onClick={submitHandler}
-      />
+      <DarkButton title={isLoading ? "Loading...." : props.button} />
       {(props.button === "login" || props.button === "signup") && (
         <p className={styles.redirectMessage}>
           {props.button === "login" ? "Don't" : "Already"} have an account?{" "}

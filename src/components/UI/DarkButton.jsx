@@ -1,16 +1,19 @@
 import React from "react";
 import styles from "./DarkButton.module.css";
 
-const DarkButton = (props) => {
-  
+const DarkButton = ({ title, onClick }) => {
   const clickHandler = (e) => {
     e.preventDefault();
-    props.onClick();
+    onClick();
   };
 
   return (
-    <button className={styles.button} type="submit" onClick={clickHandler}>
-      {props.title}
+    <button
+      className={styles.button}
+      type="submit"
+      onClick={title === "logout" ? clickHandler : undefined}
+    >
+      {title}
     </button>
   );
 };
