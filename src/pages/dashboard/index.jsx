@@ -4,6 +4,7 @@ import Head from "next/head";
 import Navbar from "@/components/navbar/Navbar";
 import ExpenseCalendar from "@/components/calendar/ExpenseCalendar";
 import "react-calendar/dist/Calendar.css";
+import CenterLayout from "@/components/UI/CenterLayout";
 
 const index = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -24,12 +25,14 @@ const index = () => {
         <title>Dashboard</title>
       </Head>
       <Navbar />
-      <div className={styles.calendarContainer}>
-        {isLoading ? (
-          <p style={{ fontSize: "2rem" }}>Loading....</p>
-        ) : (
-          <ExpenseCalendar />
-        )}
+      <div className={styles.main}>
+        <CenterLayout>
+          {isLoading ? (
+            <p style={{ fontSize: "2rem" }}>Loading....</p>
+          ) : (
+            <ExpenseCalendar />
+          )}
+        </CenterLayout>
       </div>
     </>
   );

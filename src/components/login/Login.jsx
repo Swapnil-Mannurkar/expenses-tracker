@@ -4,6 +4,7 @@ import Form from "../UI/Form";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { loginActions, loginThunk } from "@/store/loginSlice";
+import CenterLayout from "../UI/CenterLayout";
 
 const Login = () => {
   const [username, setUsername] = useState();
@@ -38,7 +39,7 @@ const Login = () => {
   }, []);
 
   return (
-    <div className={styles.loginPageContainer}>
+    <CenterLayout>
       <h1 className={styles.loginPageHeading}>Login</h1>
       <Form
         fields={{ Username: "text", Password: "password" }}
@@ -46,7 +47,7 @@ const Login = () => {
         onChange={changeHandler}
         onSubmit={submitHandler}
       />
-    </div>
+    </CenterLayout>
   );
 };
 
