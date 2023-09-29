@@ -44,7 +44,15 @@ const Input = (props) => {
         type={props.type}
         className={styles.input}
         minLength={isPassword ? 8 : ""}
-        style={{ borderColor: "black" }}
+        style={{
+          borderColor: isUsername
+            ? displayUsernameError
+              ? "red"
+              : "black"
+            : isPassword && displayPasswordError
+            ? "red"
+            : "black",
+        }}
         onChange={changeHandler}
         required
       />
