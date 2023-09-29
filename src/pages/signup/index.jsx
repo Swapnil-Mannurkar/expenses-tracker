@@ -4,6 +4,7 @@ import Form from "@/components/UI/Form";
 import { useDispatch, useSelector } from "react-redux";
 import { signupActions, signupThunk } from "@/store/signupSlice";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 const index = () => {
   const [fullName, setFullName] = useState();
@@ -53,20 +54,25 @@ const index = () => {
   }, []);
 
   return (
-    <div className={styles.loginPageContainer}>
-      <h1 className={styles.loginPageHeading}>Signup</h1>
-      <Form
-        fields={{
-          "Full name": "text",
-          Email: "email",
-          Username: "text",
-          Password: "password",
-        }}
-        button="signup"
-        onChange={changeHandler}
-        onSubmit={submitHandler}
-      />
-    </div>
+    <>
+      <Head>
+        <title>Sign up</title>
+      </Head>
+      <div className={styles.loginPageContainer}>
+        <h1 className={styles.loginPageHeading}>Signup</h1>
+        <Form
+          fields={{
+            "Full name": "text",
+            Email: "email",
+            Username: "text",
+            Password: "password",
+          }}
+          button="signup"
+          onChange={changeHandler}
+          onSubmit={submitHandler}
+        />
+      </div>
+    </>
   );
 };
 
