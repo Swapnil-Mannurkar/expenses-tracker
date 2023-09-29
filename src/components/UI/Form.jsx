@@ -46,9 +46,12 @@ const Form = (props) => {
         title={isLoading ? "Loading...." : props.button}
         onClick={submitHandler}
       />
-      <p className={styles.redirectMessage}>
-        {props.button === "login" ? "Don't" : "Already"} have an account? {link}
-      </p>
+      {(props.button === "login" || props.button === "signup") && (
+        <p className={styles.redirectMessage}>
+          {props.button === "login" ? "Don't" : "Already"} have an account?{" "}
+          {link}
+        </p>
+      )}
     </form>
   );
 };

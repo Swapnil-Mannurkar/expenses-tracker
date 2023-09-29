@@ -5,8 +5,10 @@ import Navbar from "@/components/navbar/Navbar";
 import ExpenseCalendar from "@/components/calendar/ExpenseCalendar";
 import "react-calendar/dist/Calendar.css";
 import CenterLayout from "@/components/UI/CenterLayout";
+import { useRouter } from "next/router";
 
 const index = () => {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {

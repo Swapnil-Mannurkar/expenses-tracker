@@ -1,0 +1,8 @@
+.main {
+  width: 100%;
+  height: 80vh;
+}
+
+.header {
+  color: var(--yellow);
+}
