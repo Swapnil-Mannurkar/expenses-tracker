@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./AddExpense.module.css";
 import Navbar from "@/components/navbar/Navbar";
 import Form from "@/components/UI/Form";
 import CenterLayout from "@/components/UI/CenterLayout";
 import { addExpenseThunk } from "@/store/addExpenseSlice";
 import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 
 const index = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
   const [date, setDate] = useState("");
@@ -27,6 +29,12 @@ const index = () => {
     console.log(expenseDetails);
     dispatch(addExpenseThunk(expenseDetails));
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("isLoggedIn") === "false") {
+      router.push("/");
+    }
+  }, []);
 
   return (
     <div>

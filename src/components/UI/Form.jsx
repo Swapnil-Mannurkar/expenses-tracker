@@ -36,7 +36,7 @@ const Form = (props) => {
       {fields.map((item) => (
         <div key={item[0]} className={styles.inputContainer}>
           <Input
-            for={item[0]}
+            title={item[0]}
             type={item[1]}
             onChange={changeHandler}
             formType={props.button}

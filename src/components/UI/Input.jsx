@@ -8,15 +8,15 @@ const Input = (props) => {
   const [displayUsernameError, setDisplayUsernameError] = useState(false);
   const [displayPasswordError, setDisplayPasswordError] = useState(false);
   const [displayEmailError, setDisplayEmailError] = useState(false);
-  let isUsername = props.for === "Username";
-  let isPassword = props.for === "Password";
-  let isEmail = props.for === "Email";
+  let isUsername = props.title === "Username";
+  let isPassword = props.title === "Password";
+  let isEmail = props.title === "Email";
 
   const changeHandler = (e) => {
     if (isUsername) setDisplayUsernameError(false);
     if (isPassword) setDisplayPasswordError(false);
     if (isEmail) setDisplayEmailError(false);
-    props.onChange(e.target.value, props.for);
+    props.onChange(e.target.value, props.title);
   };
 
   useEffect(() => {
@@ -51,8 +51,8 @@ const Input = (props) => {
 
   return (
     <>
-      <label className={styles.label} htmlFor={props.for}>
-        {props.for}
+      <label className={styles.label} htmlFor={props.title}>
+        {props.title}
       </label>
 
       <input
