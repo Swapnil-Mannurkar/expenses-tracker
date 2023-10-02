@@ -36,6 +36,7 @@ function ExpenseCalendar() {
 
       return `₹ ${totalAmount}`;
     }
+
   }
 
   return <Calendar value={date} onChange={setDate} tileContent={tileContent} />;

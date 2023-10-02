@@ -37,6 +37,7 @@ const Signup = () => {
       username,
       email,
       password,
+      transaction: "",
     };
     dispatch(signupThunk(user));
   };
