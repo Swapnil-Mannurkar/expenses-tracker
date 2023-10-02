@@ -26,8 +26,8 @@ const index = () => {
 
   const submitHandler = () => {
     const expenseDetails = { title, amount, date };
-    console.log(expenseDetails);
     dispatch(addExpenseThunk(expenseDetails));
+    router.push("/dashboard");
   };
 
   useEffect(() => {

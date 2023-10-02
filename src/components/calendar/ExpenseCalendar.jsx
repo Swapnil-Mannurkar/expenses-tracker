@@ -1,9 +1,17 @@
 // Calendar.js
-import React, { useState } from "react";
+import { getTransactionsThunk } from "@/store/getTransactionsSlice";
+import React, { useEffect, useState } from "react";
 import Calendar from "react-calendar";
+import { useDispatch } from "react-redux";
 
 function ExpenseCalendar() {
   const [date, setDate] = useState(new Date());
+  const [transactions, setTransactions] = useState([]);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchTransaction = dispatch(getTransactionsThunk());
+  }, []);
 
   function tileContent({ date, view }) {
     if (view === "month") {

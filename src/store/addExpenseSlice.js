@@ -9,7 +9,6 @@ export const addExpenseThunk = createAsyncThunk(
   async (expenseDetails) => {
     const title = expenseDetails.title;
     const key = expenseDetails.date;
-    console.log(key);
     const username = localStorage.getItem("username");
     const { ...expenses } = expenseDetails;
 
