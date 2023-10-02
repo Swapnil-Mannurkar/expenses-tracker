@@ -20,9 +20,13 @@ function ExpenseCalendar() {
 
   function tileContent({ date, view }) {
     if (view === "month") {
-      const selectedDate = date.toISOString().split("T")[0];
+      const selectedDateUTC = new Date(
+        Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())
+      );
+
+      const selectedDateString = selectedDateUTC.toISOString().split("T")[0];
       const filteredTransactions = transactions.filter(
-        (item) => item[1].date === selectedDate
+        (item) => item[1].date === selectedDateString
       );
 
       const totalAmount = filteredTransactions.reduce(
