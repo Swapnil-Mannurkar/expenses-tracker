@@ -3,9 +3,12 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 export const getTransactionsThunk = createAsyncThunk(
   "transactionsThunk",
   async () => {
-    const response = await fetch();
-    const data = response.json();
-    console.log(data);
+    const username = localStorage.getItem("username");
+    const response = await fetch(
+      `https://expense-tracker-b7155-default-rtdb.firebaseio.com/users/${username}/transactions.json`
+    );
+    const data = await response.json();
+    console.log(...data);
   }
 );
 
@@ -21,14 +24,14 @@ const getTransactionsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(transactionsThunk.pending, (state) => {
+      .addCase(getTransactionsThunk.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(transactionsThunk.fulfilled, (state, action) => {
+      .addCase(getTransactionsThunk.fulfilled, (state, action) => {
         state.status = "success";
         state.transactions = action.payload;
       })
-      .addCase(transactionsThunk.rejected, (state, action) => {
+      .addCase(getTransactionsThunk.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       });

@@ -9,8 +9,12 @@ function ExpenseCalendar() {
   const [transactions, setTransactions] = useState([]);
   const dispatch = useDispatch();
 
+  const fetchTransactions = async () => {
+    dispatch(getTransactionsThunk());
+  };
+
   useEffect(() => {
-    const fetchTransaction = dispatch(getTransactionsThunk());
+    fetchTransactions();
   }, []);
 
   function tileContent({ date, view }) {
