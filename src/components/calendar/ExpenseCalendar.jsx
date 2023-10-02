@@ -10,12 +10,21 @@ function ExpenseCalendar() {
   const dispatch = useDispatch();
 
   const fetchTransactions = async () => {
-    dispatch(getTransactionsThunk());
+    const response = await dispatch(getTransactionsThunk());
+    setTransactions(await response.payload);
   };
 
   useEffect(() => {
     fetchTransactions();
   }, []);
+
+  useEffect(() => {
+    transactions.map((item) => {
+      const date = item[1].date;
+      const amount = item[1].amount;
+      console.log(date, amount);
+    });
+  }, [transactions]);
 
   function tileContent({ date, view }) {
     if (view === "month") {
