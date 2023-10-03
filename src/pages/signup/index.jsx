@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import Signup from "@/components/signup/Signup";
 
-const index = () => {
+const Index = () => {
   const status = useSelector((state) => state.signupSlice.status);
   const router = useRouter();
 
@@ -27,4 +27,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;

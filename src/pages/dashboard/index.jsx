@@ -8,7 +8,7 @@ import CenterLayout from "@/components/UI/CenterLayout";
 import { useRouter } from "next/router";
 import { isLoggedIn } from "@/store/store";
 
-const index = () => {
+const Index = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -41,4 +41,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;

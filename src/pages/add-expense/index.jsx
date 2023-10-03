@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { isLoggedIn } from "@/store/store";
 
-const index = () => {
+const Index = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const [title, setTitle] = useState("");
@@ -55,4 +55,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;
