@@ -28,17 +28,21 @@ function ExpenseCalendar() {
         Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())
       );
 
-      const selectedDateString = selectedDateUTC.toISOString().split("T")[0];
-      const filteredTransactions = transactions.filter(
-        (item) => item[1].date === selectedDateString
-      );
+      try {
+        const selectedDateString = selectedDateUTC.toISOString().split("T")[0];
+        const filteredTransactions = transactions.filter(
+          (item) => item[1].date === selectedDateString
+        );
 
-      const totalAmount = filteredTransactions.reduce(
-        (accumulator, item) => accumulator + Number(item[1].amount),
-        0
-      );
+        const totalAmount = filteredTransactions.reduce(
+          (accumulator, item) => accumulator + Number(item[1].amount),
+          0
+        );
 
-      return `₹ ${totalAmount}`;
+        return `₹ ${totalAmount}`;
+      } catch (error) {
+        return `₹ 0`;
+      }
     }
   }
 
