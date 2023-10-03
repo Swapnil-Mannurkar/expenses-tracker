@@ -6,6 +6,7 @@ import ExpenseCalendar from "@/components/calendar/ExpenseCalendar";
 import "react-calendar/dist/Calendar.css";
 import CenterLayout from "@/components/UI/CenterLayout";
 import { useRouter } from "next/router";
+import { isLoggedIn } from "@/store/store";
 
 const index = () => {
   const router = useRouter();
@@ -19,7 +20,7 @@ const index = () => {
     setTimeout(() => {
       setIsLoading(false);
     }, 1000);
-  }, []);
+  }, [isLoggedIn]);
 
   return (
     <>

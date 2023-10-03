@@ -1,13 +1,17 @@
 // Calendar.js
 import { getTransactionsThunk } from "@/store/getTransactionsSlice";
+import { updateSharedVariable } from "@/store/store";
 import React, { useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import { useDispatch } from "react-redux";
+import { isLoggedIn } from "@/store/store";
 
 function ExpenseCalendar() {
   const [date, setDate] = useState(new Date());
   const [transactions, setTransactions] = useState([]);
   const dispatch = useDispatch();
+
+  updateSharedVariable(localStorage.getItem("isLoggedIn"));
 
   const fetchTransactions = async () => {
     const response = await dispatch(getTransactionsThunk());
@@ -16,7 +20,7 @@ function ExpenseCalendar() {
 
   useEffect(() => {
     fetchTransactions();
-  }, []);
+  }, [isLoggedIn]);
 
   function tileContent({ date, view }) {
     if (view === "month") {
@@ -36,7 +40,6 @@ function ExpenseCalendar() {
 
       return `₹ ${totalAmount}`;
     }
-
   }
 
   return <Calendar value={date} onChange={setDate} tileContent={tileContent} />;

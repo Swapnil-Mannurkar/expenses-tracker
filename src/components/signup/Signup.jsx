@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { signupActions, signupThunk } from "@/store/signupSlice";
 import Head from "next/head";
 import CenterLayout from "../UI/CenterLayout";
+import { isLoggedIn } from "@/store/store";
 
 const Signup = () => {
   const [fullName, setFullName] = useState();
@@ -44,7 +45,7 @@ const Signup = () => {
 
   useEffect(() => {
     dispatch(signupActions.resetStatus());
-  }, []);
+  }, [isLoggedIn]);
 
   return (
     <CenterLayout>

@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { loginActions, loginThunk } from "@/store/loginSlice";
 import CenterLayout from "../UI/CenterLayout";
+import { isLoggedIn } from "@/store/store";
 
 const Login = () => {
   const [username, setUsername] = useState();
@@ -36,7 +37,7 @@ const Login = () => {
 
   useEffect(() => {
     dispatch(loginActions.resetStatus());
-  }, []);
+  }, [isLoggedIn]);
 
   return (
     <CenterLayout>

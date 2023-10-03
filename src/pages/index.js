@@ -3,16 +3,16 @@ import styles from "@/pages/Home.module.css";
 import Login from "@/components/login/Login";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import { isLoggedIn } from "@/store/store";
 
 export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    const isLoggedIn = localStorage.getItem("isLoggedIn");
     if (isLoggedIn === true) {
       router.push("/dashboard");
     }
-  }, []);
+  }, [isLoggedIn]);
 
   return (
     <>

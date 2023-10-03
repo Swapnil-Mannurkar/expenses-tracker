@@ -6,6 +6,7 @@ import CenterLayout from "@/components/UI/CenterLayout";
 import { addExpenseThunk } from "@/store/addExpenseSlice";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
+import { isLoggedIn } from "@/store/store";
 
 const index = () => {
   const dispatch = useDispatch();
@@ -34,7 +35,7 @@ const index = () => {
     if (localStorage.getItem("isLoggedIn") === "false") {
       router.push("/");
     }
-  }, []);
+  }, [isLoggedIn]);
 
   return (
     <div>
