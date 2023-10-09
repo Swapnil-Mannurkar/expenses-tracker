@@ -4,6 +4,7 @@ import { getTransactionsByDateThunk } from "@/store/getTransactionsByDateSlice";
 import { useDispatch, useSelector } from "react-redux";
 import CenterLayout from "../UI/CenterLayout";
 import ExpenseTable from "./ExpenseTable";
+import { MdClose } from "react-icons/md";
 
 const ExpenseDetails = (props) => {
   const dispatch = useDispatch();
@@ -12,6 +13,7 @@ const ExpenseDetails = (props) => {
   );
   const [isLoading, setIsLoading] = useState(true);
   const [isTransactionNull, setIsTransactionNull] = useState(true);
+
   useEffect(() => {
     if (transactions.length === 0) {
       setIsTransactionNull(false);
@@ -30,12 +32,18 @@ const ExpenseDetails = (props) => {
 
   useEffect(() => {
     dispatch(getTransactionsByDateThunk(fullDate));
+    setTimeout(() => setIsLoading(false), 2000);
   }, []);
 
-  setTimeout(() => setIsLoading(false), 2000);
+
+  const closeModal = () => {
+    props.closeModal();
+  };
 
   return (
     <div className={styles.expenseDetailsContainer}>
+      <MdClose className={styles.closeBtn} onClick={closeModal} />
+
       {isLoading && (
         <CenterLayout>
           <h1>Loading...</h1>

@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { isLoggedIn } from "@/store/store";
 import ExpenseDetails from "./ExpenseDetails";
 import Modal from "../UI/Modal";
+import { getTransactionsByDateActions } from "@/store/getTransactionsByDateSlice";
 
 function ExpenseCalendar() {
   const [date, setDate] = useState(new Date());
@@ -27,6 +28,7 @@ function ExpenseCalendar() {
 
   const closeModal = () => {
     setIsClickedOnDate(false);
+    dispatch(getTransactionsByDateActions.reset());
   };
 
   useEffect(() => {
@@ -76,7 +78,7 @@ function ExpenseCalendar() {
       />
       {isClickedOnDate && (
         <Modal closeModal={closeModal}>
-          <ExpenseDetails date={date} />
+          <ExpenseDetails date={date} closeModal={closeModal} />
         </Modal>
       )}
     </>
