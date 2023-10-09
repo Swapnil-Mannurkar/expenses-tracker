@@ -7,7 +7,7 @@ export const getTransactionsThunk = createAsyncThunk(
     const response = await fetch(
       `https://expense-tracker-b7155-default-rtdb.firebaseio.com/users/${username}/transactions.json`
     );
-    const data = await response.json();
+    let data = await response.json();
     return Object.entries(data);
   }
 );

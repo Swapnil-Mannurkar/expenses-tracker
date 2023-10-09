@@ -8,23 +8,41 @@ export const addExpenseThunk = createAsyncThunk(
   "addExpenseThunk",
   async (expenseDetails) => {
     const title = expenseDetails.title;
-    const key = expenseDetails.date;
+    const date = expenseDetails.date;
+    const amount = expenseDetails.amount;
     const username = localStorage.getItem("username");
     const { ...expenses } = expenseDetails;
 
-    //Handle duplication of request
-    await fetch(
-      `https://expense-tracker-b7155-default-rtdb.firebaseio.com/users/${username}/transactions/${
-        key + " " + title
-      }.json`,
-      {
-        method: "PUT",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(expenses),
-      }
+    const response = await fetch(
+      `https://expense-tracker-b7155-default-rtdb.firebaseio.com/users/${username}/transactions/${date}/${title}.json`
     );
+
+    let data = await response.json();
+
+    if (data) {
+      data.amount = String(Number(data.amount) + Number(amount));
+      await fetch(
+        `https://expense-tracker-b7155-default-rtdb.firebaseio.com/users/${username}/transactions/${date}/${title}.json`,
+        {
+          method: "PUT",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+    } else {
+      await fetch(
+        `https://expense-tracker-b7155-default-rtdb.firebaseio.com/users/${username}/transactions/${date}/${title}.json`,
+        {
+          method: "PUT",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(expenses),
+        }
+      );
+    }
   }
 );
 
