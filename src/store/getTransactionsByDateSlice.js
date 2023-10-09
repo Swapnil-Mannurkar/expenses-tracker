@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const data = {
-  transactions: "",
+  transactions: [],
   status: "",
   error: "",
 };
@@ -9,14 +9,25 @@ const data = {
 export const getTransactionsByDateThunk = createAsyncThunk(
   "getTransactionsByDateThunk",
   async (date) => {
-    `https://expense-tracker-b7155-default-rtdb.firebaseio.com/users/${username}/transactions.json`;
+    const username = localStorage.getItem("username");
+    const response = await fetch(
+      `https://expense-tracker-b7155-default-rtdb.firebaseio.com/users/${username}/transactions/${date}.json`
+    );
+    const data = await response.json();
+    return Object.values(data);
   }
 );
 
 const getTransactionsByDateSlice = createSlice({
   name: "getTransactionsByDateSlice",
   initialState: data,
-  reducers: {},
+  reducers: {
+    reset(state) {
+      state.status = "idle";
+      state.transactions = [];
+      state.error = "";
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getTransactionsByDateThunk.pending, (state) => {
@@ -28,6 +39,7 @@ const getTransactionsByDateSlice = createSlice({
       })
       .addCase(getTransactionsByDateThunk.rejected, (state, action) => {
         state.status = "failed";
+        state.transactions = [];
         state.error = action.error.message;
       });
   },
