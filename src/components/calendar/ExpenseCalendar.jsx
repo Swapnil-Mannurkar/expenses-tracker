@@ -76,11 +76,13 @@ function ExpenseCalendar() {
         }}
         tileContent={tileContent}
       />
-      {isClickedOnDate && (
-        <Modal closeModal={closeModal}>
-          <ExpenseDetails date={date} closeModal={closeModal} />
-        </Modal>
-      )}
+      <div>
+        {isClickedOnDate && (
+          <Modal closeModal={closeModal}>
+            <ExpenseDetails date={date} closeModal={closeModal} />
+          </Modal>
+        )}
+      </div>
     </>
   );
 }

@@ -2,14 +2,17 @@ import React from "react";
 import styles from "./ExpenseTable.module.css";
 import TableHr from "./TableHr";
 import { MdDelete, MdEdit } from "react-icons/md";
+import { useDispatch } from "react-redux";
+import { deleteTransactionThunk } from "@/store/deleteTransaction";
 
 const ExpenseTable = ({ transactions }) => {
+  const dispatch = useDispatch();
   const onEditHandler = (item) => {
     console.log("Edit", item.title);
   };
 
   const onDeleteHandler = (item) => {
-    console.log("delete", item.title);
+    dispatch(deleteTransactionThunk({ title: item.title, date: item.date }));
   };
 
   return (
@@ -38,13 +41,13 @@ const ExpenseTable = ({ transactions }) => {
                   justifyContent: "center",
                 }}
               >
-                <MdEdit
+                {/* <MdEdit
                   onClick={() => onEditHandler(item)}
-                  style={{ fontSize: "20px", cursor: "pointer" }}
-                />
+                  style={{ fontSize: "20px", cursor: "pointer", color: "blue" }}
+                /> */}
                 <MdDelete
                   onClick={() => onDeleteHandler(item)}
-                  style={{ fontSize: "20px", cursor: "pointer" }}
+                  style={{ fontSize: "20px", cursor: "pointer", color: "red" }}
                 />
               </td>
             </tr>
