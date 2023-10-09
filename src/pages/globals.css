@@ -83,12 +83,21 @@ abbr[title] {
 }
 
 @media screen and (max-width: 500px) {
+  .react-calendar__navigation__label__labelText {
+    font-size: 1rem;
+  }
+
+ .react-calendar__tile {
+    padding: 3px !important;
+  }
+
   .react-calendar {
-    width: 90% !important;
+    width: 95% !important;
     padding: 10px;
   }
 
   .react-calendar__month-view__days button {
+    gap: 0rem;
     height: 45px;
   }
 
@@ -97,7 +106,7 @@ abbr[title] {
   }
 
   .react-calendar button {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
   }
 
   .react-calendar__navigation {

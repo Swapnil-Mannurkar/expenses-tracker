@@ -1,14 +1,16 @@
-// Calendar.js
 import { getTransactionsThunk } from "@/store/getTransactionsSlice";
 import { updateSharedVariable } from "@/store/store";
 import React, { useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import { useDispatch } from "react-redux";
 import { isLoggedIn } from "@/store/store";
+import ExpenseDetails from "./ExpenseDetails";
+import Modal from "../UI/Modal";
 
 function ExpenseCalendar() {
   const [date, setDate] = useState(new Date());
   const [transactions, setTransactions] = useState([]);
+  const [isClickedOnDate, setIsClickedOnDate] = useState(false);
   const dispatch = useDispatch();
 
   updateSharedVariable(localStorage.getItem("isLoggedIn"));
@@ -16,6 +18,15 @@ function ExpenseCalendar() {
   const fetchTransactions = async () => {
     const response = await dispatch(getTransactionsThunk());
     setTransactions(await response.payload);
+  };
+
+  const clickedOnDate = (date) => {
+    setDate(date);
+    setIsClickedOnDate(true);
+  };
+
+  const closeModal = () => {
+    setIsClickedOnDate(false);
   };
 
   useEffect(() => {
@@ -46,7 +57,22 @@ function ExpenseCalendar() {
     }
   }
 
-  return <Calendar value={date} onChange={setDate} tileContent={tileContent} />;
+  return (
+    <>
+      <Calendar
+        value={date}
+        onChange={(date) => {
+          clickedOnDate(date);
+        }}
+        tileContent={tileContent}
+      />
+      {isClickedOnDate && (
+        <Modal closeModal={closeModal}>
+          <ExpenseDetails date={date} />
+        </Modal>
+      )}
+    </>
+  );
 }
 
 export default ExpenseCalendar;

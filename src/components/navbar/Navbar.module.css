@@ -25,3 +25,35 @@
   text-transform: uppercase;
   font-weight: bold;
 }
+
+@media screen and (max-width: 500px) {
+  .navbarContainer {
+    width: 90%;
+  }
+
+  .navbarItems {
+    gap: 1rem;
+  }
+
+  .navbarContainer {
+    padding: 15px 0px;
+  }
+
+  .navItemsContainer {
+    left: 0;
+    top: 12%;
+    position: absolute;
+    width: 100%;
+  }
+  
+  .navbarItems {
+    height: 40vh;
+    background-color: #000;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+  }
+}

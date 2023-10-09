@@ -1,0 +1,17 @@
+.expenseDetailsContainer {
+  position: absolute;
+  top: 15%;
+  width: 60%;
+  height: 75%;
+  background-color: #ffffff;
+  color: #000000;
+  z-index: 10;
+}
+
+@media screen and (max-width: 500px) {
+  .expenseDetailsContainer {
+    top: 12%;
+    width: 95%;
+    height: 70%;
+  }
+}
