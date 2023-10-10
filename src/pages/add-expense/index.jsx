@@ -7,6 +7,7 @@ import { addExpenseThunk } from "@/store/addExpenseSlice";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { isLoggedIn } from "@/store/store";
+import { updateExpenseThunk } from "@/store/updateExpenseSlice";
 
 const Index = () => {
   const dispatch = useDispatch();
@@ -40,7 +41,11 @@ const Index = () => {
       dispatch(addExpenseThunk(expenseDetails));
       router.push("/dashboard");
     } else {
-      console.log("updateThunk")
+      const previousExpenseDetails = { editTitle, editAmount, editDate };
+      const updatedExpenseDetails = { title, amount, date };
+      const details = { previousExpenseDetails, updatedExpenseDetails };
+      dispatch(updateExpenseThunk(details));
+      router.push("/dashboard");
     }
   };
 

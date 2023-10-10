@@ -26,27 +26,24 @@ const ExpenseTable = ({ transactions, deleteHandler, editHandler }) => {
       </thead>
       <tbody>
         {transactions.map((item) => (
-          <tr key={item.title}>
-            <td>{item.date}</td>
-            <td>{item.title}</td>
-            <td>{item.amount}</td>
-            <td
-              style={{
-                display: "flex",
-                gap: "1rem",
-                justifyContent: "center",
-              }}
-            >
-              <MdEdit
-                onClick={() => onEditHandler(item)}
-                style={{ fontSize: "20px", cursor: "pointer", color: "blue" }}
-              />
-              <MdDelete
-                onClick={() => onDeleteHandler(item)}
-                style={{ fontSize: "20px", cursor: "pointer", color: "red" }}
-              />
-            </td>
-          </tr>
+          <>
+            <tr key={item.title} className={styles.details}>
+              <td>{item.date}</td>
+              <td>{item.title}</td>
+              <td>{item.amount}</td>
+              <td className={styles.controls}>
+                <MdEdit
+                  onClick={() => onEditHandler(item)}
+                  style={{ fontSize: "20px", cursor: "pointer", color: "blue" }}
+                />
+                <MdDelete
+                  onClick={() => onDeleteHandler(item)}
+                  style={{ fontSize: "20px", cursor: "pointer", color: "red" }}
+                />
+              </td>
+            </tr>
+            <TableHr />
+          </>
         ))}
       </tbody>
     </table>

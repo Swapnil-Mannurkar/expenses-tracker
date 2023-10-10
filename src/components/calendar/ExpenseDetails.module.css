@@ -1,7 +1,7 @@
 .expenseDetailsContainer {
   position: absolute;
   top: 20%;
-  width: 60%;
+  width: 50%;
   min-height: 50vh;
   height: auto;
   background-color: #ffffff;
@@ -31,5 +31,9 @@
     top: 12%;
     width: 95%;
     height: 70%;
+  }
+  
+  .expenseDetailsHeading {
+    font-size: 1.2rem;
   }
 }

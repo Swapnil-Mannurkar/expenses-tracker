@@ -1,10 +1,11 @@
-import { configureStore } from "@reduxjs/toolkit";
-import signupSlice from "./signupSlice";
 import loginSlice from "./loginSlice";
+import signupSlice from "./signupSlice";
 import addExpenseSlice from "./addExpenseSlice";
+import { configureStore } from "@reduxjs/toolkit";
+import deleteTransaction from "./deleteTransaction";
+import updateExpenseSlice from "./updateExpenseSlice";
 import getTransactionsSlice from "./getTransactionsSlice";
 import getTransactionsByDateSlice from "./getTransactionsByDateSlice";
-import deleteTransaction from "./deleteTransaction";
 
 export let isLoggedIn = "";
 
@@ -18,6 +19,7 @@ const store = configureStore({
     signupSlice,
     addExpenseSlice,
     deleteTransaction,
+    updateExpenseSlice,
     getTransactionsSlice,
     getTransactionsByDateSlice,
   },
