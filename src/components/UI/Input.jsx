@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 const Input = (props) => {
   const signupStatus = useSelector((state) => state.signupSlice.status);
   const loginStatus = useSelector((state) => state.loginSlice.status);
+  const [value, setValue] = useState("");
   const [displayUsernameError, setDisplayUsernameError] = useState(false);
   const [displayPasswordError, setDisplayPasswordError] = useState(false);
   const [displayEmailError, setDisplayEmailError] = useState(false);
@@ -49,6 +50,10 @@ const Input = (props) => {
     setDisplayEmailError(false);
   }, [props.formType]);
 
+  useEffect(() => {
+    if (props.value) setValue(props.value);
+  }, [props.value]);
+
   return (
     <>
       <label className={styles.label} htmlFor={props.title}>
@@ -58,6 +63,7 @@ const Input = (props) => {
       <input
         type={props.type}
         className={styles.input}
+        value={value}
         minLength={isPassword ? 8 : ""}
         style={{
           borderColor: isUsername

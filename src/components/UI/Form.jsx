@@ -37,6 +37,15 @@ const Form = (props) => {
         <div key={item[0]} className={styles.inputContainer}>
           <Input
             title={item[0]}
+            value={
+              item[0] === "Title"
+                ? props.values.title
+                : item[0] === "Amount"
+                ? props.values.amount
+                : item[0] === "Date"
+                ? props.values.date
+                : ""
+            }
             type={item[1]}
             onChange={changeHandler}
             formType={props.button}

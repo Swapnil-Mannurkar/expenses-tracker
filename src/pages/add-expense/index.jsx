@@ -14,6 +14,15 @@ const Index = () => {
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
   const [date, setDate] = useState("");
+  const { title: editTitle, amount: editAmount, date: editDate } = router.query;
+
+  useEffect(() => {
+    if (Object.entries(router.query).length !== 0) {
+      setTitle(editTitle);
+      setAmount(editAmount);
+      setDate(editDate);
+    }
+  }, []);
 
   const changeHandler = (value, field) => {
     if (field === "Title") {
@@ -26,9 +35,13 @@ const Index = () => {
   };
 
   const submitHandler = () => {
-    const expenseDetails = { title, amount, date };
-    dispatch(addExpenseThunk(expenseDetails));
-    router.push("/dashboard");
+    if (Object.entries(router.query).length === 0) {
+      const expenseDetails = { title, amount, date };
+      dispatch(addExpenseThunk(expenseDetails));
+      router.push("/dashboard");
+    } else {
+      console.log("updateThunk")
+    }
   };
 
   useEffect(() => {
@@ -42,10 +55,19 @@ const Index = () => {
       <Navbar />
       <main className={styles.main}>
         <CenterLayout>
-          <h1 className={styles.header}>Add new expense</h1>
+          <h1 className={styles.header}>
+            {Object.entries(router.query).length === 0
+              ? `Add new expense`
+              : "Update expense"}
+          </h1>
           <Form
             fields={{ Title: "text", Amount: "number", Date: "date" }}
-            button="add expense"
+            values={{ title, amount, date }}
+            button={
+              Object.entries(router.query).length === 0
+                ? "Add Expense"
+                : "UPDATE"
+            }
             onChange={changeHandler}
             onSubmit={submitHandler}
           />

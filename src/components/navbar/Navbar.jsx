@@ -23,7 +23,7 @@ const Navbar = (props) => {
   const logoutHandler = () => {
     dispatch(loginActions.logout());
     updateSharedVariable(localStorage.getItem("isLoggedIn"));
-    router.push("/dashboard");
+    router.push("/");
   };
 
   const toggleMenu = () => {
@@ -35,7 +35,7 @@ const Navbar = (props) => {
       <div className={styles.navbarContainer}>
         <div className={styles.titleContainer}>
           <h2 className={styles.title}>
-            <Link href="/">expense tracker</Link>
+            <Link href="/dashboard">expense tracker</Link>
           </h2>
         </div>
         {screenSize < 1000 && (
@@ -50,7 +50,7 @@ const Navbar = (props) => {
                 className={styles.navbarItem}
                 style={currentPage === "dashboard" ? { color: "red" } : {}}
               >
-                <Link href="/">Home</Link>
+                <Link href="/dashboard">Home</Link>
               </li>
               <li
                 className={styles.navbarItem}
