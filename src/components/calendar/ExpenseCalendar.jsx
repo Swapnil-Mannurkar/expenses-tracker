@@ -2,7 +2,7 @@ import { getTransactionsThunk } from "@/store/getTransactionsSlice";
 import { updateSharedVariable } from "@/store/store";
 import React, { useEffect, useState } from "react";
 import Calendar from "react-calendar";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { isLoggedIn } from "@/store/store";
 import ExpenseDetails from "./ExpenseDetails";
 import Modal from "../UI/Modal";
@@ -12,6 +12,7 @@ function ExpenseCalendar() {
   const [date, setDate] = useState(new Date());
   const [transactions, setTransactions] = useState([]);
   const [isClickedOnDate, setIsClickedOnDate] = useState(false);
+  const status = useSelector((state) => state.deleteTransaction.status);
   const dispatch = useDispatch();
 
   updateSharedVariable(localStorage.getItem("isLoggedIn"));
@@ -33,7 +34,7 @@ function ExpenseCalendar() {
 
   useEffect(() => {
     fetchTransactions();
-  }, [isLoggedIn]);
+  }, [isLoggedIn, status]);
 
   function tileContent({ date, view }) {
     if (view === "month") {

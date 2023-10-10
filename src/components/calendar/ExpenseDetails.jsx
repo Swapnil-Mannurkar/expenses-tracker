@@ -5,12 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import CenterLayout from "../UI/CenterLayout";
 import ExpenseTable from "./ExpenseTable";
 import { MdClose } from "react-icons/md";
+import { deleteTransactionThunk } from "@/store/deleteTransaction";
 
 const ExpenseDetails = (props) => {
   const dispatch = useDispatch();
   const transactions = useSelector(
     (state) => state.getTransactionsByDateSlice.transactions
   );
+  const status = useSelector((state) => state.deleteTransaction.status);
   const [isLoading, setIsLoading] = useState(true);
   const [isTransactionNull, setIsTransactionNull] = useState(true);
 
@@ -32,12 +34,18 @@ const ExpenseDetails = (props) => {
 
   useEffect(() => {
     dispatch(getTransactionsByDateThunk(fullDate));
+    if (status === "loading") {
+      setIsLoading(true);
+    }
     setTimeout(() => setIsLoading(false), 2000);
-  }, []);
-
+  }, [status]);
 
   const closeModal = () => {
     props.closeModal();
+  };
+
+  const onDeleteHandler = ({ title, date }) => {
+    dispatch(deleteTransactionThunk({ title, date }));
   };
 
   return (
@@ -52,7 +60,10 @@ const ExpenseDetails = (props) => {
       {isTransactionNull && !isLoading && (
         <CenterLayout>
           <h2 className={styles.expenseDetailsHeading}>Expense Details</h2>
-          <ExpenseTable transactions={transactions} />
+          <ExpenseTable
+            transactions={transactions}
+            deleteHandler={onDeleteHandler}
+          />
         </CenterLayout>
       )}
       {!isTransactionNull && !isLoading && (

@@ -4,6 +4,7 @@ import loginSlice from "./loginSlice";
 import addExpenseSlice from "./addExpenseSlice";
 import getTransactionsSlice from "./getTransactionsSlice";
 import getTransactionsByDateSlice from "./getTransactionsByDateSlice";
+import deleteTransaction from "./deleteTransaction";
 
 export let isLoggedIn = "";
 
@@ -16,6 +17,7 @@ const store = configureStore({
     loginSlice,
     signupSlice,
     addExpenseSlice,
+    deleteTransaction,
     getTransactionsSlice,
     getTransactionsByDateSlice,
   },

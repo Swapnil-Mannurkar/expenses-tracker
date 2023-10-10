@@ -2,17 +2,14 @@ import React from "react";
 import styles from "./ExpenseTable.module.css";
 import TableHr from "./TableHr";
 import { MdDelete, MdEdit } from "react-icons/md";
-import { useDispatch } from "react-redux";
-import { deleteTransactionThunk } from "@/store/deleteTransaction";
 
-const ExpenseTable = ({ transactions }) => {
-  const dispatch = useDispatch();
+const ExpenseTable = ({ transactions, deleteHandler }) => {
   const onEditHandler = (item) => {
     console.log("Edit", item.title);
   };
 
   const onDeleteHandler = (item) => {
-    dispatch(deleteTransactionThunk({ title: item.title, date: item.date }));
+    deleteHandler({ title: item.title, date: item.date });
   };
 
   return (
@@ -29,30 +26,27 @@ const ExpenseTable = ({ transactions }) => {
       </thead>
       <tbody>
         {transactions.map((item) => (
-          <>
-            <tr key={item.title}>
-              <td>{item.date}</td>
-              <td>{item.title}</td>
-              <td>{item.amount}</td>
-              <td
-                style={{
-                  display: "flex",
-                  gap: "1rem",
-                  justifyContent: "center",
-                }}
-              >
-                {/* <MdEdit
+          <tr key={item.title}>
+            <td>{item.date}</td>
+            <td>{item.title}</td>
+            <td>{item.amount}</td>
+            <td
+              style={{
+                display: "flex",
+                gap: "1rem",
+                justifyContent: "center",
+              }}
+            >
+              {/* <MdEdit
                   onClick={() => onEditHandler(item)}
                   style={{ fontSize: "20px", cursor: "pointer", color: "blue" }}
                 /> */}
-                <MdDelete
-                  onClick={() => onDeleteHandler(item)}
-                  style={{ fontSize: "20px", cursor: "pointer", color: "red" }}
-                />
-              </td>
-            </tr>
-            <TableHr />
-          </>
+              <MdDelete
+                onClick={() => onDeleteHandler(item)}
+                style={{ fontSize: "20px", cursor: "pointer", color: "red" }}
+              />
+            </td>
+          </tr>
         ))}
       </tbody>
     </table>
