@@ -3,9 +3,9 @@ import styles from "./ExpenseTable.module.css";
 import TableHr from "./TableHr";
 import { MdDelete, MdEdit } from "react-icons/md";
 
-const ExpenseTable = ({ transactions, deleteHandler }) => {
+const ExpenseTable = ({ transactions, deleteHandler, editHandler }) => {
   const onEditHandler = (item) => {
-    console.log("Edit", item.title);
+    editHandler(item);
   };
 
   const onDeleteHandler = (item) => {
@@ -37,10 +37,10 @@ const ExpenseTable = ({ transactions, deleteHandler }) => {
                 justifyContent: "center",
               }}
             >
-              {/* <MdEdit
-                  onClick={() => onEditHandler(item)}
-                  style={{ fontSize: "20px", cursor: "pointer", color: "blue" }}
-                /> */}
+              <MdEdit
+                onClick={() => onEditHandler(item)}
+                style={{ fontSize: "20px", cursor: "pointer", color: "blue" }}
+              />
               <MdDelete
                 onClick={() => onDeleteHandler(item)}
                 style={{ fontSize: "20px", cursor: "pointer", color: "red" }}

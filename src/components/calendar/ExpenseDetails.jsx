@@ -4,11 +4,14 @@ import { getTransactionsByDateThunk } from "@/store/getTransactionsByDateSlice";
 import { useDispatch, useSelector } from "react-redux";
 import CenterLayout from "../UI/CenterLayout";
 import ExpenseTable from "./ExpenseTable";
-import { MdClose } from "react-icons/md";
+import { MdAdd, MdAddAPhoto, MdAddCircle, MdClose } from "react-icons/md";
 import { deleteTransactionThunk } from "@/store/deleteTransaction";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 const ExpenseDetails = (props) => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const transactions = useSelector(
     (state) => state.getTransactionsByDateSlice.transactions
   );
@@ -48,6 +51,10 @@ const ExpenseDetails = (props) => {
     dispatch(deleteTransactionThunk({ title, date }));
   };
 
+  const onEditHandler = ({ title, amount, date }) => {
+    router.push({ pathname: "/add-expense", query: { title, amount, date } });
+  };
+
   return (
     <div className={styles.expenseDetailsContainer}>
       <MdClose className={styles.closeBtn} onClick={closeModal} />
@@ -63,12 +70,16 @@ const ExpenseDetails = (props) => {
           <ExpenseTable
             transactions={transactions}
             deleteHandler={onDeleteHandler}
+            editHandler={onEditHandler}
           />
         </CenterLayout>
       )}
       {!isTransactionNull && !isLoading && (
         <CenterLayout>
           <h1>No expenses!</h1>
+          <Link href="/add-expense" style={{ color: "blue" }}>
+            <MdAddCircle style={{ fontSize: "14px" }} /> Add expense
+          </Link>
         </CenterLayout>
       )}
     </div>

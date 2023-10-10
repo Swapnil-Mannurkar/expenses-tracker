@@ -23,7 +23,7 @@ const Navbar = (props) => {
   const logoutHandler = () => {
     dispatch(loginActions.logout());
     updateSharedVariable(localStorage.getItem("isLoggedIn"));
-    router.push("/");
+    router.push("/dashboard");
   };
 
   const toggleMenu = () => {

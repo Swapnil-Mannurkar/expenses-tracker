@@ -11,6 +11,7 @@ import { getTransactionsByDateActions } from "@/store/getTransactionsByDateSlice
 function ExpenseCalendar() {
   const [date, setDate] = useState(new Date());
   const [transactions, setTransactions] = useState([]);
+  // const [totalMonthAmount, setTotalMonthAmount] = useState(0);
   const [isClickedOnDate, setIsClickedOnDate] = useState(false);
   const status = useSelector((state) => state.deleteTransaction.status);
   const dispatch = useDispatch();
@@ -36,6 +37,12 @@ function ExpenseCalendar() {
     fetchTransactions();
   }, [isLoggedIn, status]);
 
+  // const updateTotalMonthAmount = (amount) => {
+  //   setTotalMonthAmount(amount);
+  // };
+
+  // let monthTotalAmount = 0;
+
   function tileContent({ date, view }) {
     if (view === "month") {
       const selectedDateUTC = new Date(
@@ -56,10 +63,13 @@ function ExpenseCalendar() {
         let totalAmount = 0;
 
         filteredTransactions.map((items) => {
-          items.map(
-            (item) => (totalAmount = totalAmount + Number(item[1].amount))
-          );
+          items.map((item) => {
+            totalAmount = totalAmount + Number(item[1].amount);
+            // monthTotalAmount = monthTotalAmount + totalAmount;
+          });
         });
+
+        // updateTotalMonthAmount(monthTotalAmount);
 
         return `₹ ${totalAmount}`;
       } catch (error) {
@@ -84,6 +94,7 @@ function ExpenseCalendar() {
           </Modal>
         )}
       </div>
+      {/* <div>Total amount spent this month: {totalMonthAmount}</div> */}
     </>
   );
 }
