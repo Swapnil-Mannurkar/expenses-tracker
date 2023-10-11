@@ -13,40 +13,49 @@ const ExpenseTable = ({ transactions, deleteHandler, editHandler }) => {
   };
 
   return (
-    <table className={styles.table}>
-      <thead>
-        <TableHr />
-        <tr className={styles.headings}>
-          <th>Date</th>
-          <th>Title</th>
-          <th>Amount</th>
-          <th>Modify</th>
-        </tr>
-        <TableHr />
-      </thead>
-      <tbody>
-        {transactions.map((item) => (
-          <>
-            <tr key={item.title} className={styles.details}>
-              <td>{item.date}</td>
-              <td>{item.title}</td>
-              <td>{item.amount}</td>
-              <td className={styles.controls}>
-                <MdEdit
-                  onClick={() => onEditHandler(item)}
-                  style={{ fontSize: "20px", cursor: "pointer", color: "blue" }}
-                />
-                <MdDelete
-                  onClick={() => onDeleteHandler(item)}
-                  style={{ fontSize: "20px", cursor: "pointer", color: "red" }}
-                />
-              </td>
-            </tr>
-            <TableHr />
-          </>
-        ))}
-      </tbody>
-    </table>
+    <div className={styles.tableContainer}>
+      <table className={styles.table}>
+        <thead>
+          <tr className={styles.headings}>
+            <th>Date</th>
+            <th>Title</th>
+            <th>Amount</th>
+            <th>Modify</th>
+          </tr>
+          <TableHr />
+        </thead>
+        <tbody>
+          {transactions.map((item) => (
+            <>
+              <tr key={item.title} className={styles.details}>
+                <td>{item.date}</td>
+                <td>{item.title}</td>
+                <td>{item.amount}</td>
+                <td className={styles.controls}>
+                  <MdEdit
+                    onClick={() => onEditHandler(item)}
+                    style={{
+                      fontSize: "20px",
+                      cursor: "pointer",
+                      color: "blue",
+                    }}
+                  />
+                  <MdDelete
+                    onClick={() => onDeleteHandler(item)}
+                    style={{
+                      fontSize: "20px",
+                      cursor: "pointer",
+                      color: "red",
+                    }}
+                  />
+                </td>
+              </tr>
+              <TableHr />
+            </>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 };
 

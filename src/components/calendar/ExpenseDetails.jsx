@@ -65,14 +65,15 @@ const ExpenseDetails = (props) => {
         </CenterLayout>
       )}
       {isTransactionNull && !isLoading && (
-        <CenterLayout>
+        <div className={styles.expenseDetailsHeaderContainer}>
           <h2 className={styles.expenseDetailsHeading}>Expense Details</h2>
+          <hr className={styles.expenseDetailsHeadingHr} />
           <ExpenseTable
             transactions={transactions}
             deleteHandler={onDeleteHandler}
             editHandler={onEditHandler}
           />
-        </CenterLayout>
+        </div>
       )}
       {!isTransactionNull && !isLoading && (
         <CenterLayout>

@@ -2,13 +2,26 @@
   position: absolute;
   top: 20%;
   width: 50%;
-  min-height: 50vh;
+  min-height: 45vh;
   height: auto;
   background-color: #ffffff;
   color: #000000;
   z-index: 10;
-  padding: 40px 0;
+  padding: 40px 0 0;
   display: flex;
+  align-items: center;
+}
+
+.expenseDetailsHeadingHr{
+  width: 90%;
+  margin-top: 20px;
+}
+
+.expenseDetailsHeaderContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 
@@ -21,7 +34,7 @@
 .closeBtn {
   position: absolute;
   right: 5%;
-  top: 10%;
+  top: 9%;
   font-size: 30px;
   cursor: pointer;
 }
