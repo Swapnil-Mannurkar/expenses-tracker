@@ -12,7 +12,7 @@
   align-items: center;
 }
 
-.expenseDetailsHeadingHr{
+.expenseDetailsHeadingHr {
   width: 90%;
   margin-top: 20px;
 }
@@ -34,19 +34,28 @@
 .closeBtn {
   position: absolute;
   right: 5%;
-  top: 9%;
+  top: 8%;
   font-size: 30px;
   cursor: pointer;
 }
 
 @media screen and (max-width: 500px) {
   .expenseDetailsContainer {
-    top: 12%;
     width: 95%;
-    height: 70%;
+    min-height: 35vh;
   }
-  
+
   .expenseDetailsHeading {
     font-size: 1.2rem;
+  }
+
+  .closeBtn {
+    top: 8%;
+  }
+}
+
+@media screen and (min-width: 501px) and (max-width: 1000px) {
+  .expenseDetailsContainer {
+    width: 80%;
   }
 }
