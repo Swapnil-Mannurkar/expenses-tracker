@@ -28,6 +28,13 @@ const Input = (props) => {
     }
   }, [signupStatus]);
 
+  useEffect(() => {
+    if (loginStatus === "User not found!") {
+      setDisplayUsernameError(true);
+    } else if (loginStatus === "Incorrect password!") {
+      setDisplayPasswordError(true);
+    }
+  }, [loginStatus]);
 
   useEffect(() => {
     if (loginStatus === "loading" || signupStatus === "loading") {
