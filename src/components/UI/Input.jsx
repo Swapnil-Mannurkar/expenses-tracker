@@ -13,7 +13,6 @@ const Input = (props) => {
   let isPassword = props.title === "Password";
   let isEmail = props.title === "Email";
   
-
   const changeHandler = (e) => {
     if (isUsername) setDisplayUsernameError(false);
     if (isPassword) setDisplayPasswordError(false);
