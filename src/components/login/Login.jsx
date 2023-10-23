@@ -47,6 +47,7 @@ const Login = () => {
         button="login"
         onChange={changeHandler}
         onSubmit={submitHandler}
+        values={{ username: username, password: password }}
       />
     </CenterLayout>
   );

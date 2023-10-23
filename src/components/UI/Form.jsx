@@ -44,6 +44,14 @@ const Form = (props) => {
                 ? props.values.amount
                 : item[0] === "Date"
                 ? props.values.date
+                : item[0] === "Username"
+                ? props.values.username
+                : item[0] === "Password"
+                ? props.values.password
+                : item[0] === "Full name"
+                ? props.values.fullname
+                : item[0] === "Email"
+                ? props.values.email
                 : ""
             }
             type={item[1]}

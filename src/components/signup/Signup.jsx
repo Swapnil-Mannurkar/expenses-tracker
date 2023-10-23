@@ -60,6 +60,7 @@ const Signup = () => {
         button="signup"
         onChange={changeHandler}
         onSubmit={submitHandler}
+        values={{ username: username, password: password, fullname: fullName, email: email }}
       />
     </CenterLayout>
   );
